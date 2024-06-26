@@ -13,9 +13,16 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Example implements ShouldBroadcastNow
+class Example implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    //public string $queue = 'chat';
+
+    public function broadcastQueue(): string
+    {
+        return 'chat';
+    }
 
     /**
      * Create a new event instance.
