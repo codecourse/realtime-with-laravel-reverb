@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -19,9 +20,22 @@ class Example implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct(public User $user)
+    public function __construct(protected User $user, protected Message $message)
     {
         //
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'user' => [
+                'id' => $this->user->id,
+                'name' => $this->user->name,
+            ],
+            'message' => [
+                'id' => $this->message->id,
+            ]
+        ];
     }
 
     /**
