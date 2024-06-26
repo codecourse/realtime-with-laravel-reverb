@@ -12,6 +12,7 @@
                     class="p-6 text-gray-900"
                     x-data="{
                         dispatched: false,
+                        delivered: false,
                         order: null
                     }"
                     x-init="
@@ -20,11 +21,21 @@
                                 order = event.order
                                 dispatched = true
                             })
+                            .listen('OrderDelivered', (event) => {
+                                order = event.order
+                                delivered = true
+                            })
                     "
                 >
                     <template x-if="dispatched">
                         <div>
                             Order (#<span x-text="order.id"></span>) has been dispatched
+                        </div>
+                    </template>
+
+                    <template x-if="delivered">
+                        <div>
+                            Order (#<span x-text="order.id"></span>) has been delivered
                         </div>
                     </template>
                 </div>

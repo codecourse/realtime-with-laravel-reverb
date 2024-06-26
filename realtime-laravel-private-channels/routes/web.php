@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\OrderDelivered;
 use App\Events\OrderDispatched;
 use App\Http\Controllers\ProfileController;
 use App\Models\Order;
@@ -11,7 +12,11 @@ Route::get('/', function () {
 });
 
 Route::get('/broadcast', function () {
+    sleep(3);
     broadcast(new OrderDispatched(User::find(1), Order::find(1)));
+
+    sleep(5);
+    broadcast(new OrderDelivered(User::find(1), Order::find(1)));
 });
 
 Route::get('/dashboard', function () {
