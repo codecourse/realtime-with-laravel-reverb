@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Chat\ExampleTwo;
 use App\Events\Example;
 use App\Http\Controllers\ProfileController;
 use App\Models\Message;
@@ -11,8 +12,10 @@ Route::get('/', function () {
 });
 
 Route::get('/broadcast', function () {
-    broadcast(new Example(User::find(1), Message::find(1)));
+    //broadcast(new Example(User::find(1), Message::find(1)));
+    broadcast(new ExampleTwo());
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
