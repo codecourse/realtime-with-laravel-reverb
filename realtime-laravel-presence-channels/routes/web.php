@@ -1,11 +1,18 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/room/{room}', function (Room $room) {
+    return view('room', [
+        'room' => $room
+    ]);
+})->middleware(['auth', 'verified'])->name('room');;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
