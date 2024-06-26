@@ -18,6 +18,12 @@
                             .here((users) => {
                                 usersHere = users
                             })
+                            .joining(user => {
+                                usersHere.push(user)
+                            })
+                            .leaving(user => {
+                                usersHere = usersHere.filter(u => u.id !== user.id)
+                            })
                     "
                 >
                     <div>
